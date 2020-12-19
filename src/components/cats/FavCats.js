@@ -21,7 +21,7 @@ export default class FavCats extends Component {
   }
   render() {
     const cats = this.state.catList.map((item) => {
-      let cat = { url: item.image.url, id :  item.image.id};
+      let cat = { url: item.image.url, id :  item.image.id, score:0};
       return cat;
     });
     return (

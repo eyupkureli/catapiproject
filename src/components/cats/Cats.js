@@ -33,7 +33,7 @@ class Cats extends Component {
 <Row xs="1" sm="2" md="4">
          
           {this.props.catList.map((cat) => (
-          <Cat url={cat.url} id = {cat.id}/>
+          <Cat url={cat.url} id = {cat.id} score={cat.score}/>
         ))}        
         </Row>
       </Container>

@@ -18,7 +18,13 @@ import { FcLike } from "react-icons/fc";
 class Cat extends Component {
   constructor(props) {
     super(props);
+    this.state ={
+        score:props.score
+    }
   }
+
+
+
   onClickFavourite = (catId) => {
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "cdbfbcaf-5f5f-4abf-9f4d-fc5974aacf9c");
@@ -39,6 +45,26 @@ class Cat extends Component {
       .catch((error) => console.log("error", error));
   }
 
+  onClickVote = (catId, vote) => {
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "cdbfbcaf-5f5f-4abf-9f4d-fc5974aacf9c");
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({ image_id: catId, value : vote });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      //redirect: 'follow'
+    };
+
+    fetch("https://api.thecatapi.com/v1/votes", requestOptions)
+      .then((response) => response.json())
+      .then((result) => /*console.log(result)*/ this.setState ({score : this.state.score + (vote===1? 1 : -1) }) )
+      .catch((error) => console.log("error", error));
+  }
+
   render() {
     return (
       <Col>
@@ -52,10 +78,10 @@ class Cat extends Component {
             />
             <CardBody>
               <div style={{ display: "flex" }}>
-                <Button color="success" style={{ marginRight: "auto" }} outline>
+                <Button color="success" style={{ marginRight: "auto" }} outline  onClick={() => this.onClickVote(this.props.id, 1)}>
                   <BiHappy /> Love it!
                 </Button>
-                <Button color="danger" style={{ marginLeft: "auto" }} outline>
+                <Button color="danger" style={{ marginLeft: "auto" }} outline  onClick={() => this.onClickVote(this.props.id, 0)}> 
                   <BiAngry />
                   Nope it!
                 </Button>
@@ -64,7 +90,7 @@ class Cat extends Component {
               <div>
                 <ListGroup style={{ textAlign: "center" }}>
                   <ListGroupItem className="justify-content-between">
-                    Score <Badge color="warning">14</Badge>
+                    Score <Badge color="warning">{this.state.score}</Badge>
                   </ListGroupItem>
                   <ListGroupItem className="justify-content-between">
                     <Button
