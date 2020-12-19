@@ -1,17 +1,27 @@
 import React from "react";
 import { Container} from "reactstrap";
 import Navi from "../navi/Navi";
-import Cats from "../cats/Cats";
-import Upload from "../upload/Upload";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Dashboard from "./Dashboard"
+import Upload from "../upload/Upload"
+import FavCats from "../cats/FavCats"
 
 function App() {
   return (
     <Container>
       <Navi></Navi>
       <br></br>
-      <Cats></Cats>
-      <br></br>
-      <Upload></Upload>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" exact component={Dashboard}></Route>
+          <Route path = "/upload" component={Upload}></Route>
+          <Route path = "/favs" component={FavCats}></Route>
+          
+        </Switch>
+      </BrowserRouter>
+      
+      
+      
     </Container>
   );
 }

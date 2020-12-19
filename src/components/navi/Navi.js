@@ -30,7 +30,8 @@ const Navi = (props) => {
               </NavLink>
             </NavItem>
           </Nav>
-          <NavLink href = "#">My Fav Cats</NavLink>
+          <NavLink href = "/upload">Upload Image</NavLink>
+          <NavLink href = "/favs">My Fav Cats</NavLink>
         </Collapse>
       </Navbar>
     </div>
