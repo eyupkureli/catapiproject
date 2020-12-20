@@ -1,4 +1,0 @@
-export const UPLOAD_IMAGE = "UPLOAD_IMAGE"
-export const LIST_IMAGES = "LIST_IMAGES"
-export const ADD_FAVOURITE = "ADD_FAVOURITE"
-export const VOTE_IMAGES = "VOTE_IMAGES"

@@ -1,5 +1,5 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
-import {Redirect} from "react-router"
 
 class Upload extends React.Component {
   constructor(props) {
@@ -29,7 +29,10 @@ class Upload extends React.Component {
 
     fetch("https://api.thecatapi.com/v1/images/upload", requestOptions)
       .then((response) => response.text())
-      .then((result) => {console.log(result); this.props.history.push('/')})
+      .then((result) => {
+        console.log(result);
+        this.props.history.push("/");
+      })
       .catch((error) => console.log("error", error));
   }
 
@@ -53,7 +56,7 @@ class Upload extends React.Component {
     let { imagePreviewUrl } = this.state;
     let $imagePreview = null;
     if (imagePreviewUrl) {
-      $imagePreview = <img src={imagePreviewUrl} />;
+      $imagePreview = <img src={imagePreviewUrl} alt="Cat image" />;
     } else {
       $imagePreview = (
         <div className="previewText">Please select an Image for Preview</div>

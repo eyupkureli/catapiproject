@@ -5,7 +5,6 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
   NavLink,
 } from "reactstrap";
 
@@ -21,17 +20,9 @@ const Navi = (props) => {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
-            <NavItem>
-              <NavLink href="/components/">Components</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">
-                GitHub
-              </NavLink>
-            </NavItem>
           </Nav>
           <NavLink href = "/upload">Upload Image</NavLink>
-          <NavLink href = "/favs">My Fav Cats</NavLink>
+          <NavLink href = "/favs">See My Fav Cats</NavLink>
         </Collapse>
       </Navbar>
     </div>

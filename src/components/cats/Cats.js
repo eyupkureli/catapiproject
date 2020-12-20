@@ -1,44 +1,43 @@
+/* eslint-disable no-undef */
 import React, { Component } from "react";
-import {
-  Container,
-  Row
-} from "reactstrap";
+import { Container, Row } from "reactstrap";
 
 import Cat from "./Cat";
 
 class Cats extends Component {
 
-  //state = { catList: [] };
+  isFavourite = (catId) => {
+    let allImageIds = this.props.favCatList.map((fav) =>{
+      return fav.image.id
+    });
 
-  // componentDidMount() {
-  //   var myHeaders = new Headers();
-  //   myHeaders.append("x-api-key", "cdbfbcaf-5f5f-4abf-9f4d-fc5974aacf9c");
+    return allImageIds.includes(catId);
+  }
 
-  //   var requestOptions = {
-  //     method: "GET",
-  //     headers: myHeaders,
-  //     redirect: "follow",
-  //   };
+  getFavouriteId = (catId) => {
+    let allFavouriteIds = this.props.favCatList.filter((fav) => fav.image.id === catId).map((fav) =>{
+      return fav.id
+    });
 
-  //   fetch("https://api.thecatapi.com/v1/images?limit=100", requestOptions)
-  //     .then((response) => response.json())
-  //     .then((data) => this.setState({ catList: data }))
-  //     .catch((error) => console.log("error", error));
-  // }
+    return allFavouriteIds[0];
+  }
 
   render() {
     return (
       <Container>
-
-<Row xs="1" sm="2" md="4">
-         
+        <Row xs="1" sm="2" md="4">
           {this.props.catList.map((cat) => (
-          <Cat url={cat.url} id = {cat.id} score={cat.score}/>
-        ))}        
+            <Cat
+              url={cat.url}
+              id={cat.id}
+              score={cat.score}
+              sharedisplay={cat.sharedisplay}
+              favourite={this.props.favourite === "1" || this.isFavourite(cat.id) ? "1" : "0"}
+              favouriteId={cat.favouriteId ? cat.favouriteId : this.getFavouriteId(cat.id)}
+            />
+          ))}
         </Row>
       </Container>
-
-      
     );
   }
 }
