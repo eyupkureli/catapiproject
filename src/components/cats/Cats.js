@@ -23,8 +23,12 @@ class Cats extends Component {
   }
 
   render() {
+  
     return (
+     
+
       <Container>
+  
         <Row xs="1" sm="2" md="4">
           {this.props.catList.map((cat) => (
             <Cat

@@ -10,7 +10,7 @@ class Upload extends React.Component {
   _handleSubmit(e) {
 
     e.preventDefault();
-    
+
     if (this.state.file === ""){
       alert("Please upload an image!");
     }else{
@@ -39,7 +39,7 @@ class Upload extends React.Component {
         console.log(result);
         this.props.history.push("/");
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => {console.log("error", error); alert ("Cat image could not be uploaded!")});
 
     }
 

@@ -21,7 +21,7 @@ export default class Dashboard extends Component {
         //this.setState({ catList: data });
         this.getScore(data);
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => {console.log("error", error); alert ("Cat images could not be retreived!")});
 
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "cdbfbcaf-5f5f-4abf-9f4d-fc5974aacf9c");
@@ -35,11 +35,11 @@ export default class Dashboard extends Component {
     fetch("https://api.thecatapi.com/v1/favourites?limit=100", requestOptions)
       .then((response) => response.json())
       .then((data) => this.setState({ favCatList: data }))
-      .catch((error) => console.log("error", error));
+      .catch((error) => {console.log("error", error); alert ("Favourite Cat images could not be retreived!")});
   }
 
 
-  
+
   getScore = (newCatList) => {
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "cdbfbcaf-5f5f-4abf-9f4d-fc5974aacf9c");
@@ -65,7 +65,7 @@ export default class Dashboard extends Component {
         this.setState({ catList: newCatList });
         //console.log(this.state.catList)
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => {console.log("error", error); alert ("Vote could not be sent!")});
   };
 
   render() {

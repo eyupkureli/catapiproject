@@ -11,21 +11,39 @@ import {
   ListGroupItem,
   Badge,
   Col,
+  Popover,
+  PopoverHeader,
+  PopoverBody,
 } from "reactstrap";
 
 import { BiHappy, BiAngry, BiHeart } from "react-icons/bi";
 import { FcLike } from "react-icons/fc";
+import {
+  FacebookShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  WhatsappIcon,
+  TwitterShareButton,
+  TwitterIcon,
+  PinterestShareButton,
+  PinterestIcon,
+} from "react-share";
 
 class Cat extends Component {
   constructor(props) {
     super(props);
     this.state = {
       score: props.score,
+      popoverOpen: false,
     };
   }
 
+  toggle = () => {
+    let newpopoverOpen = !this.state.popoverOpen;
+    this.setState({ popoverOpen: newpopoverOpen });
+  };
+
   onClickFavourite = (catId, favourite, favouriteId) => {
-    
     if (favourite === "0") {
       var myHeaders = new Headers();
       myHeaders.append("x-api-key", "cdbfbcaf-5f5f-4abf-9f4d-fc5974aacf9c");
@@ -42,8 +60,8 @@ class Cat extends Component {
 
       fetch("https://api.thecatapi.com/v1/favourites/", requestOptions)
         .then((response) => response.json())
-        .then((result) => window.location.reload(false) )
-        .catch((error) => console.log("error", error));
+        .then((result) => window.location.reload(false))
+        .catch((error) => {console.log("error", error); alert ("Cat image could not be marked as favourite!")});
     } else {
       var myHeaders = new Headers();
       myHeaders.append("x-api-key", "cdbfbcaf-5f5f-4abf-9f4d-fc5974aacf9c");
@@ -54,9 +72,12 @@ class Cat extends Component {
         //redirect: "follow",
       };
 
-      fetch("https://api.thecatapi.com/v1/favourites/" + favouriteId, requestOptions)
+      fetch(
+        "https://api.thecatapi.com/v1/favourites/" + favouriteId,
+        requestOptions
+      )
         .then((response) => response.json())
-        .then((result) => window.location.reload(false)     )
+        .then((result) => window.location.reload(false))
         .catch((error) => console.log("error", error));
     }
   };
@@ -82,13 +103,15 @@ class Cat extends Component {
           score: this.state.score + (vote === 1 ? 1 : -1),
         })
       )
-      .catch((error) => console.log("error", error));
+      .catch((error) => {console.log("error", error); alert ("Vote could not be sent!")});
   };
 
   render() {
     return (
       <Col>
-        <CardGroup style={{ maxWidth: 300, minWidth: 200, marginRight : "1rem" }}>
+        <CardGroup
+          style={{ maxWidth: 300, minWidth: 200, marginRight: "1rem" }}
+        >
           <Card>
             <CardImg
               width="100%"
@@ -145,9 +168,34 @@ class Cat extends Component {
                       }}
                       outline
                       color="primary"
+                      id="Popover1"
                     >
                       Share
                     </Button>
+                    <Popover
+                      placement="bottom"
+                      isOpen={this.state.popoverOpen}
+                      target="Popover1"
+                      toggle={this.toggle}
+                    >
+                      <PopoverHeader>Share with friends!</PopoverHeader>
+                      <PopoverBody>
+                        <FacebookShareButton url={this.props.url} >
+                          <FacebookIcon size={30} borderRadius={100} />
+                        </FacebookShareButton>
+                        <WhatsappShareButton url={this.props.url}>
+                          <WhatsappIcon size={30} borderRadius={100} />
+                        </WhatsappShareButton>
+
+                        <TwitterShareButton url={this.props.url}>
+                          <TwitterIcon size={30} borderRadius={100} />
+                        </TwitterShareButton>
+
+                        <PinterestShareButton url={this.props.url}>
+                          <PinterestIcon size={30} borderRadius={100} />
+                        </PinterestShareButton>
+                      </PopoverBody>
+                    </Popover>
                   </ListGroupItem>
                 </ListGroup>
               </div>

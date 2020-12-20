@@ -17,7 +17,7 @@ export default class FavCats extends Component {
     fetch("https://api.thecatapi.com/v1/favourites?limit=100", requestOptions)
       .then((response) => response.json())
       .then((data) => this.setState({ catList: data }))
-      .catch((error) => console.log("error", error));
+      .catch((error) => {console.log("error", error); alert ("Favourite Cat images could not be retreived!")});
   }
   render() {
     const cats = this.state.catList.map((item) => {
@@ -27,6 +27,7 @@ export default class FavCats extends Component {
     return (
       <div>
         <Cats catList={cats} favourite = "1"></Cats>
+        {this.state.catList.length === 0 && <div>You have no favourite cats...</div>}
       </div>
     );
   }
