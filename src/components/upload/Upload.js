@@ -8,7 +8,13 @@ class Upload extends React.Component {
   }
 
   _handleSubmit(e) {
+
     e.preventDefault();
+    
+    if (this.state.file === ""){
+      alert("Please upload an image!");
+    }else{
+     
     // TODO: do something with -> this.state.file
     console.log("handle uploading-", this.state.file);
     // console.log('handle uploading-', this.state.imagePreviewUrl);
@@ -34,6 +40,10 @@ class Upload extends React.Component {
         this.props.history.push("/");
       })
       .catch((error) => console.log("error", error));
+
+    }
+
+    
   }
 
   _handleImageChange(e) {
@@ -59,20 +69,24 @@ class Upload extends React.Component {
       $imagePreview = <img src={imagePreviewUrl} alt="Cat image" />;
     } else {
       $imagePreview = (
-        <div className="previewText">Please select an Image for Preview</div>
+        <div className="previewText"></div>
       );
     }
 
     return (
       <div className="previewComponent">
         <form onSubmit={(e) => this._handleSubmit(e)}>
+          <label>
           <input
             className="fileInput"
             type="file"
             onChange={(e) => this._handleImageChange(e)}
           />
+          </label>
+          
           <button
             className="submitButton"
+            class="btn btn-outline-primary"
             type="submit"
             onClick={(e) => this._handleSubmit(e)}
           >

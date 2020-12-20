@@ -25,7 +25,7 @@ class Cat extends Component {
   }
 
   onClickFavourite = (catId, favourite, favouriteId) => {
-      alert(favourite + "*" + favouriteId);
+    
     if (favourite === "0") {
       var myHeaders = new Headers();
       myHeaders.append("x-api-key", "cdbfbcaf-5f5f-4abf-9f4d-fc5974aacf9c");
@@ -88,7 +88,7 @@ class Cat extends Component {
   render() {
     return (
       <Col>
-        <CardGroup style={{ maxWidth: 340, minWidth: 200 }}>
+        <CardGroup style={{ maxWidth: 300, minWidth: 200, marginRight : "1rem" }}>
           <Card>
             <CardImg
               width="100%"
